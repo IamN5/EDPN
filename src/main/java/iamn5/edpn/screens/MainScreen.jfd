@@ -1,0 +1,126 @@
+JFDML JFormDesigner: "7.0.2.4.305" Java: "11.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "edpnIcon"
+				"text": " "
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 25
+				"y": 25
+				"width": 50
+				"height": 45
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "loadingIcon"
+				"text": " "
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 245
+				"y": 160
+				"width": 461
+				"height": 316
+			} )
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "loadingProgress"
+				"foreground": new java.awt.Color( 148, 88, 214, 255 )
+				"visible": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": -5
+				"y": 620
+				"height": 19
+				"width": 965
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "eventsScroll"
+				"visible": false
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "eventsText"
+					"visible": false
+					"font": new com.jformdesigner.model.SwingDerivedFont( "Fira Code", 0, 14, true )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 90
+				"y": 440
+				"width": 770
+				"height": 150
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "greetingText"
+				"text": "Greetings,"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 16, true )
+				"verticalAlignment": 3
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 90
+				"y": 25
+				"width": 75
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "commanderName"
+				"text": "Commander IamN5"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 131072, 22, true )
+				"verticalAlignment": 3
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 90
+				"y": 40
+				"width": 400
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lastLoaded"
+				"text": "Last loaded at BRT 2020"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 14, true )
+				"verticalAlignment": 3
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 90
+				"y": 65
+				"width": 430
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "closeButton"
+				"text": "x"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "closeButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 900
+				"y": 0
+				"width": 50
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "minimizeButton"
+				"text": "-"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "minimizeButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 850
+				"y": 0
+				"width": 50
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "buildText"
+				"text": "Game build"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 14, true )
+				"visible": false
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 710
+				"y": 5
+				"width": 125
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 950, 630 )
+		} )
+	}
+}
