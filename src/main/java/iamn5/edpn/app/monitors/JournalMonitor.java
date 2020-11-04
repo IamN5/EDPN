@@ -12,90 +12,108 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class JournalMonitor {
-    private boolean running;
     private String lastFilename;
     private final String journalPath = System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/";
     private final Pattern journalPattern = Pattern.compile("^Journal.*\\.[0-9.]+\\.log$");
     private final int pollingRate = 100;
     private final int relaxedPollingRate = 5000;
+
+    private long currentRate = relaxedPollingRate;
+    private Optional<Path> lastJournal = Optional.empty();
+    private long lastSize = 0;
+    private Runnable pollingTask;
+    private final ScheduledExecutorService scheduledExecutor;
+
+    private ScheduledFuture<?> scheduledTask;
     private final ListenableQueue<JSONObject> eventQueue;
 
     public JournalMonitor(ListenableQueue<JSONObject> eventQueue) {
         this.eventQueue = eventQueue;
+        scheduledExecutor = new ScheduledThreadPoolExecutor(1);
     }
 
     public void start() throws InterruptedException {
-        long lastSize = 0;
-        int rate = relaxedPollingRate;
 
         Logger.info("JournalMonitor started!");
 
-        running = true;
-        while (running) {
-
-            if (lastFilename != null && !lastFilename.isEmpty() && Processes.isEDRunning()) {
-                rate = pollingRate;
-            }
-
-
-            try {
-                Optional<Path> lastJournal = findLatestJournal();
-
-                if (!lastJournal.isPresent()) {
-                    int tries = 0;
-
-                    Logger.error("Could not find a journal. Have you ever executed Elite Dangerous?");
-                    do {
-                        //TODO Instead of sleeping, use ScheduledExecutorService
-                        Logger.info("Fetching journal... (" + ++tries + ")");
-                        Thread.sleep(1000);
-                        lastJournal = findLatestJournal();
-
-                    } while (!lastJournal.isPresent());
+        pollingTask = new Runnable() {
+            @Override
+            public void run() {
+                if (lastFilename != null && !lastFilename.isEmpty() && Processes.isEDRunning()) {
+                    currentRate = pollingRate;
                 }
 
+                try {
+                    lastJournal = findLatestJournal();
 
-                String newFilename = lastJournal.get().getFileName().toString();
-                long currentSize = Files.size(lastJournal.get());
+                    if (!lastJournal.isPresent()) {
+                        int tries = 0;
 
-                // Reads essential stuff for our application to work, ignoring all rest.
-                if (lastFilename == null || !lastFilename.equals(newFilename)) {
-                    lastFilename = newFilename;
-                    lastSize = currentSize;
+                        do {
+                            //TODO Instead of sleeping, use ScheduledExecutorService
+                            Logger.info("Fetching journal... (" + ++tries + ")");
+                            Thread.sleep(1000);
+                            lastJournal = findLatestJournal();
 
-                    ReadCommanderEvent(lastJournal.get(), lastSize);
-                } else {
-
-                    if (currentSize != lastSize) {
-                        long startPos = 0;
-
-                        // File has been appended
-                        if (currentSize > lastSize) {
-                            startPos = lastSize;
-                        }
-
-                        ReadEvents(lastJournal.get(), startPos, currentSize - startPos);
+                        } while (!lastJournal.isPresent());
                     }
+
+                    String newFilename = lastJournal.get().getFileName().toString();
+                    long currentSize = Files.size(lastJournal.get());
+
+                    // Reads essential stuff for our application to work, ignoring all rest.
+                    if (lastFilename == null || !lastFilename.equals(newFilename)) {
+                        lastFilename = newFilename;
+                        lastSize = currentSize;
+
+                        ReadCommanderEvent(lastJournal.get(), lastSize);
+                    } else {
+                        Logger.info("Current size: " + currentSize + "Last size: " + lastSize);
+                        if (currentSize != lastSize) {
+                            long startPos = 0;
+
+                            // File has been appended
+                            if (currentSize > lastSize) {
+                                startPos = lastSize;
+                            }
+
+                            lastSize = currentSize;
+
+                            ReadEvents(lastJournal.get(), startPos, currentSize - startPos);
+                        }
+                    }
+
+                    scheduleMonitoring();
+                } catch (IOException | InterruptedException e) {
+                    Logger.error("Could not get latest journal: " + e.getMessage());
                 }
-
-
-            } catch (IOException e) {
-                Logger.error("Could not get latest journal: " + e.getMessage());
             }
+        };
 
-            Thread.sleep(rate);
+        pollingTask.run();
+    }
+
+    public void scheduleMonitoring() {
+        if (pollingTask != null) {
+            scheduledTask = scheduledExecutor.schedule(pollingTask, currentRate, TimeUnit.MILLISECONDS);
         }
     }
 
     public void stop() {
-        running = false;
+        if (scheduledTask != null) {
+            scheduledTask.cancel(false);
+        }
     }
 
     public boolean isRunning() {
-        return running;
+        return scheduledTask != null && !scheduledTask.isDone();
     }
 
     private void ReadCommanderEvent(Path filePath, long readSize) {
