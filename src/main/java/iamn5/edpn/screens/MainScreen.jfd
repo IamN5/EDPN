@@ -64,7 +64,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "commanderName"
-				"text": "Commander IamN5"
+				"text": "Commander not found!"
 				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 131072, 22, true )
 				"verticalAlignment": 3
 				"visible": false
@@ -114,9 +114,9 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 14, true )
 				"visible": false
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 710
+				"x": 655
 				"y": 5
-				"width": 125
+				"width": 190
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

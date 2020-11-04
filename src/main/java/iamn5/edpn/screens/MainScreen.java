@@ -31,7 +31,6 @@ public class MainScreen extends MovableScreen {
 
         initComponents();
         eventsText.setEditable(false);
-        eventsText.setAutoscrolls(true);
 
         try {
             loadingIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/assets/logos/loading.png"))));
@@ -49,6 +48,8 @@ public class MainScreen extends MovableScreen {
         edpnIcon.setVisible(true);
         eventsScroll.setVisible(true);
         eventsText.setVisible(true);
+        greetingText.setVisible(true);
+        commanderName.setVisible(true);
 
         loadingIcon.setVisible(false);
         loadingProgress.setVisible(false);
@@ -68,6 +69,7 @@ public class MainScreen extends MovableScreen {
         ListenableQueue<JSONObject> eventQueue = frameManager.getEventQueue();
         eventQueue.addListener(element -> {
             eventsText.append(element.toString() + "\n");
+            eventsText.setCaretPosition(eventsText.getDocument().getLength());
         });
 
         for (int i = 1; i < 3; i++) {
@@ -96,9 +98,7 @@ public class MainScreen extends MovableScreen {
     public void showCommanderName(String name, Date lastLoadDate) {
         commanderName.setText("Commander " + name);
         lastLoaded.setText("Last loaded at " + lastLoadDate);
-
-        greetingText.setVisible(true);
-        commanderName.setVisible(true);
+        
         lastLoaded.setVisible(true);
     }
 
@@ -132,12 +132,12 @@ public class MainScreen extends MovableScreen {
         buildText = new JLabel();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
-        . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-        java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
-        throw new RuntimeException( ); }} );
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
+        .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax
+        . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
+        12 ) ,java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans
+        .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e.
+        getPropertyName () ) )throw new RuntimeException( ) ;} } );
         setLayout(null);
 
         //---- edpnIcon ----
@@ -179,7 +179,7 @@ public class MainScreen extends MovableScreen {
         greetingText.setBounds(90, 25, 75, greetingText.getPreferredSize().height);
 
         //---- commanderName ----
-        commanderName.setText("Commander IamN5");
+        commanderName.setText("Commander not found!");
         commanderName.setFont(new Font("Eurostile-Roman", commanderName.getFont().getStyle() & ~Font.ITALIC, 22));
         commanderName.setVerticalAlignment(SwingConstants.BOTTOM);
         commanderName.setVisible(false);
@@ -213,7 +213,7 @@ public class MainScreen extends MovableScreen {
         buildText.setFont(new Font("Eurostile-Roman", buildText.getFont().getStyle(), 14));
         buildText.setVisible(false);
         add(buildText);
-        buildText.setBounds(710, 5, 125, buildText.getPreferredSize().height);
+        buildText.setBounds(655, 5, 190, buildText.getPreferredSize().height);
 
         setPreferredSize(new Dimension(950, 630));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
