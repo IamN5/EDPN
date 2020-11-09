@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class JournalMonitor {
+public class JournalMonitor implements IMonitor {
     private String lastFilename;
     private final String journalPath = System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/";
     private final Pattern journalPattern = Pattern.compile("^Journal.*\\.[0-9.]+\\.log$");
@@ -39,6 +39,7 @@ public class JournalMonitor {
         scheduledExecutor = new ScheduledThreadPoolExecutor(1);
     }
 
+    @Override
     public void start() {
 
         Logger.info("JournalMonitor started!");
@@ -105,12 +106,14 @@ public class JournalMonitor {
         }
     }
 
+    @Override
     public void stop() {
         if (scheduledTask != null) {
             scheduledTask.cancel(false);
         }
     }
 
+    @Override
     public boolean isRunning() {
         return scheduledTask != null && !scheduledTask.isDone();
     }
