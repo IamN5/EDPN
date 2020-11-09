@@ -1,6 +1,6 @@
 package iamn5.edpn.framework.core.ui;
 
-import iamn5.edpn.app.monitors.JournalMonitor;
+import iamn5.edpn.framework.monitors.JournalMonitor;
 import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.core.ListenableQueue;
 import iamn5.edpn.screens.MainScreen;

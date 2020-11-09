@@ -1,6 +1,6 @@
 package iamn5.edpn.framework.core;
 
-import iamn5.edpn.app.monitors.JournalMonitor;
+import iamn5.edpn.framework.monitors.JournalMonitor;
 import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.core.ui.JFrameManager;
 import com.bulenkov.darcula.DarculaLaf;

@@ -1,4 +1,4 @@
-package iamn5.edpn.app.utils;
+package iamn5.edpn.framework.utils;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;

@@ -1,6 +1,6 @@
-package iamn5.edpn.app.monitors;
+package iamn5.edpn.framework.monitors;
 
-import iamn5.edpn.app.utils.Processes;
+import iamn5.edpn.framework.utils.Processes;
 import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.core.ListenableQueue;
 import org.json.JSONArray;

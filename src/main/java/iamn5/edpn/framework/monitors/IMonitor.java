@@ -1,4 +1,4 @@
-package iamn5.edpn.app.monitors;
+package iamn5.edpn.framework.monitors;
 
 public interface IMonitor {
     void start();
