@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -136,7 +135,7 @@ public class JFrameManager {
     }
 
     public void setGameVersion(String gameVersion) {
-        gameVersion = gameVersion;
+        this.gameVersion = gameVersion;
     }
 
     public void setGameBuild(String gameBuild) {
