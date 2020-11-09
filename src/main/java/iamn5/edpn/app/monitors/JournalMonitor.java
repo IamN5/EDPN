@@ -39,7 +39,7 @@ public class JournalMonitor {
         scheduledExecutor = new ScheduledThreadPoolExecutor(1);
     }
 
-    public void start() throws InterruptedException {
+    public void start() {
 
         Logger.info("JournalMonitor started!");
 
@@ -57,7 +57,6 @@ public class JournalMonitor {
                         int tries = 0;
 
                         do {
-                            //TODO Instead of sleeping, use ScheduledExecutorService
                             Logger.info("Fetching journal... (" + ++tries + ")");
                             Thread.sleep(1000);
                             lastJournal = findLatestJournal();
@@ -75,7 +74,7 @@ public class JournalMonitor {
 
                         ReadCommanderEvent(lastJournal.get(), lastSize);
                     } else {
-                        Logger.info("Current size: " + currentSize + "Last size: " + lastSize);
+
                         if (currentSize != lastSize) {
                             long startPos = 0;
 
