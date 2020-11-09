@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +28,7 @@ public class JournalMonitor implements IMonitor {
     private Optional<Path> lastJournal = Optional.empty();
     private long lastSize = 0;
     private Runnable pollingTask;
-    private final ScheduledExecutorService scheduledExecutor;
+    private final ScheduledThreadPoolExecutor scheduledExecutor;
 
     private ScheduledFuture<?> scheduledTask;
     private final ListenableQueue<JSONObject> eventQueue;
@@ -37,6 +36,7 @@ public class JournalMonitor implements IMonitor {
     public JournalMonitor(ListenableQueue<JSONObject> eventQueue) {
         this.eventQueue = eventQueue;
         scheduledExecutor = new ScheduledThreadPoolExecutor(1);
+        scheduledExecutor.setRemoveOnCancelPolicy(true);
     }
 
     @Override
