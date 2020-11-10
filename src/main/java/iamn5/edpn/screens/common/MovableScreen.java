@@ -1,6 +1,8 @@
-package iamn5.edpn.framework.core.ui;
+package iamn5.edpn.screens.common;
 
 import iamn5.edpn.framework.Logger;
+import iamn5.edpn.framework.core.ui.JFrameManager;
+import iamn5.edpn.framework.core.ui.Screen;
 
 import javax.swing.*;
 import java.awt.*;
