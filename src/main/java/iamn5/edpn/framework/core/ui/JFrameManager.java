@@ -1,5 +1,6 @@
 package iamn5.edpn.framework.core.ui;
 
+import iamn5.edpn.framework.monitors.hotkey.HotkeyMonitor;
 import iamn5.edpn.framework.monitors.JournalMonitor;
 import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.core.ListenableQueue;
@@ -23,14 +24,16 @@ public class JFrameManager {
     private JFrame frame;
     private final ListenableQueue<JSONObject> eventQueue;
     private final JournalMonitor journalMonitor;
+    private final HotkeyMonitor hotkeyMonitor;
     //TODO Use one class/object that contains all the game relevant information.
     private JSONObject commanderObject;
     private String gameVersion;
     private String gameBuild;
 
-    public JFrameManager(ListenableQueue<JSONObject> eventQueue, JournalMonitor journalMonitor) {
+    public JFrameManager(ListenableQueue<JSONObject> eventQueue, JournalMonitor journalMonitor, HotkeyMonitor hotkeyMonitor) {
         this.eventQueue = eventQueue;
         this.journalMonitor = journalMonitor;
+        this.hotkeyMonitor = hotkeyMonitor;
     }
 
     public void load(Screen pane) {
@@ -104,6 +107,10 @@ public class JFrameManager {
 
     public JournalMonitor getJournalMonitor() {
         return journalMonitor;
+    }
+
+    public HotkeyMonitor getHotkeyMonitor() {
+        return hotkeyMonitor;
     }
 
     public ListenableQueue<JSONObject> getEventQueue() {

@@ -5,6 +5,7 @@ import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.core.ui.JFrameManager;
 import com.bulenkov.darcula.DarculaLaf;
 import iamn5.edpn.framework.events.EventHandler;
+import iamn5.edpn.framework.monitors.hotkey.HotkeyMonitor;
 import iamn5.edpn.screens.MainScreen;
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class App {
 
     public App() {
         Logger.initialization();
-        frameManager = new JFrameManager(eventQueue, new JournalMonitor(eventQueue));
+        frameManager = new JFrameManager(eventQueue, new JournalMonitor(eventQueue), new HotkeyMonitor());
         eventHandler = new EventHandler(frameManager);
     }
 
@@ -31,6 +32,7 @@ public class App {
             e.printStackTrace();
         }
 
+        //TODO handle events by polling eventQueue in another thread
         eventQueue.addListener(eventHandler::handle);
 
         frameManager.load(new MainScreen(frameManager));
