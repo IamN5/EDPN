@@ -34,14 +34,14 @@ public class HoverableJButton extends JButton {
             g.setColor(backgroundColor);
         }
 
-        g.fillRect(0, 0, getSize().width - 1, getSize().height - 1);
+        g.fillRect(0, 0, getSize().width, getSize().height);
         super.paintComponent(g);
     }
 
     @Override
     protected void paintBorder(Graphics g) {
         g.setColor(getBackground());
-        g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+        g.drawRect(0, 0, getWidth(), getHeight());
     }
 
     public Color getBackgroundColor() {
