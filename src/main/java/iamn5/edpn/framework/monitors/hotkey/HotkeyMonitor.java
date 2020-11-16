@@ -5,6 +5,7 @@ import com.sun.jna.platform.win32.WinUser;
 import iamn5.edpn.framework.Logger;
 import iamn5.edpn.framework.monitors.IMonitor;
 
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -89,5 +90,9 @@ public class HotkeyMonitor implements IMonitor {
         }
 
         return false;
+    }
+
+    public ArrayList<Hotkey> getHotkeys() {
+        return new ArrayList<>(hotkeys.values());
     }
 }
