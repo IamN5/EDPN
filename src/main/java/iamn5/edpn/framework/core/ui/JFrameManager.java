@@ -70,12 +70,17 @@ public class JFrameManager {
         if (modal != null) modal.dispose();
 
         try {
-            modal = dialogClass.getDeclaredConstructor(Window.class).newInstance(frame);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            Logger.error("Error while loading modal " + dialogClass.getSimpleName());
-            e.printStackTrace();
+            modal = dialogClass.getDeclaredConstructor(Window.class, JFrameManager.class).newInstance(frame, this);
+        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
 
-            return;
+            try {
+                modal = dialogClass.getDeclaredConstructor(Window.class).newInstance(frame);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException instantiationException) {
+                Logger.error("Error while loading modal " + dialogClass.getSimpleName());
+                e.printStackTrace();
+
+                return;
+            }
         }
 
         modal.setTitle(title);
