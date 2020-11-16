@@ -10,6 +10,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "edpnIcon"
 				"text": " "
+				"visible": false
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
 				"y": 25
@@ -36,20 +37,6 @@ new FormModel {
 				"y": 620
 				"height": 19
 				"width": 965
-			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "eventsScroll"
-				"visible": false
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "eventsText"
-					"visible": false
-					"font": new com.jformdesigner.model.SwingDerivedFont( "Fira Code", 0, 14, true )
-				} )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 90
-				"y": 440
-				"width": 770
-				"height": 150
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "greetingText"
@@ -86,10 +73,14 @@ new FormModel {
 				"width": 430
 				"height": 20
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
+			add( new FormComponent( "iamn5.edpn.screens.common.HoverableJButton" ) {
 				name: "closeButton"
 				"text": "x"
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"backgroundColor": &Color0 new java.awt.Color( 60, 63, 65, 255 )
+				"hoverBackgroundColor": &Color1 new java.awt.Color( 47, 49, 50, 255 )
+				"pressedBackgroundColor": &Color2 new java.awt.Color( 40, 42, 43, 255 )
+				"visible": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "closeButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 900
@@ -97,10 +88,14 @@ new FormModel {
 				"width": 50
 				"height": 25
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
+			add( new FormComponent( "iamn5.edpn.screens.common.HoverableJButton" ) {
 				name: "minimizeButton"
 				"text": "-"
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"backgroundColor": #Color0
+				"hoverBackgroundColor": #Color1
+				"pressedBackgroundColor": #Color2
+				"visible": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "minimizeButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 850
@@ -117,6 +112,148 @@ new FormModel {
 				"x": 655
 				"y": 5
 				"width": 190
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "content"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+					"autoSize": false
+				} ) {
+					name: "mainScreen"
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJButton" ) {
+						name: "hotkeyButton"
+						"text": "Hotkeys"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "hotkeyButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 0
+						"width": 335
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "eventsScroll"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "eventsText"
+							"font": new com.jformdesigner.model.SwingDerivedFont( "Fira Code", 0, 14, true )
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 290
+						"width": 770
+						"height": 150
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card1"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+					"autoSize": false
+				} ) {
+					name: "hotkeyScreen"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "backIcon"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "backIconMouseClicked", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 0
+						"y": 0
+						"width": 15
+						"height": 25
+					} )
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJTextField" ) {
+						name: "hotkeyTextField"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "hotkeyTextFieldKeyPressed", true ) )
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyTyped", "hotkeyTextFieldKeyTyped", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 185
+						"height": 30
+						"x": 250
+						"y": 70
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "nameLabel"
+						"text": "Name:"
+						"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 16, true )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 125
+						"height": 17
+						"x": 45
+						"y": 50
+					} )
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJTextField" ) {
+						name: "nameTextField"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 45
+						"y": 70
+						"width": 185
+					} )
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJButton" ) {
+						name: "keyActionButton"
+						"text": "Key"
+						"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 14, true )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "keyActionButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 45
+						"y": 145
+						"height": 45
+						"width": 80
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "hotkeylabel2"
+						"text": "Actions:"
+						"font": #SwingDerivedFont0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 110
+						"height": 17
+						"x": 45
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "hotkeylabel"
+						"text": "Hotkey:"
+						"font": #SwingDerivedFont0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 250
+						"y": 50
+						"width": 110
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "listScroll"
+						add( new FormComponent( "iamn5.edpn.screens.common.HoverableJList" ) {
+							name: "actionList"
+							"selectionMode": 0
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 145
+						"y": 145
+						"width": 505
+						"height": 205
+					} )
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJButton" ) {
+						name: "removeActionButton"
+						"text": "Remove"
+						"visible": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 78
+						"height": 45
+						"x": 690
+						"y": 140
+					} )
+					add( new FormComponent( "iamn5.edpn.screens.common.RoundJButton" ) {
+						name: "createHotkeyButton"
+						"text": "Create new hotkey"
+						"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 16, true )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "createHotkeyButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 300
+						"y": 395
+						"width": 170
+						"height": 45
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card2"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 90
+				"y": 150
+				"height": 440
+				"width": 770
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

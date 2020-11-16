@@ -1,0 +1,117 @@
+JFDML JFormDesigner: "7.0.2.4.305" Java: "11.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 2
+			"resizable": false
+			"undecorated": true
+			add( new FormComponent( "iamn5.edpn.screens.common.HoverableJButton" ) {
+				name: "closeButton"
+				"text": "x"
+				"backgroundColor": new java.awt.Color( 60, 63, 65, 255 )
+				"hoverBackgroundColor": new java.awt.Color( 47, 49, 50, 255 )
+				"pressedBackgroundColor": new java.awt.Color( 40, 42, 43, 255 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "closeButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 460
+				"y": 0
+				"width": 50
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "edpnLogo"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 230
+				"y": 85
+				"width": 50
+				"height": 45
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "keyText"
+				"text": "Key/Hotkey:"
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 17, true )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 160
+				"width": 510
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "keyActionType"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 0, false )
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Key press and release"
+					addElement( "Key press and release" )
+					addElement( "Key press" )
+					addElement( "Key release" )
+				}
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "keyActionTypeItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 160
+				"y": 265
+				"width": 185
+				"height": 30
+			} )
+			add( new FormComponent( "iamn5.edpn.screens.common.RoundJTextField" ) {
+				name: "hotkeyTextField"
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyTyped", "hotkeyTextFieldKeyTyped", true ) )
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "hotkeyTextFieldKeyPressed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 185
+				"x": 160
+				"y": 185
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "typeLabel"
+				"text": "Type of action:"
+				"font": #SwingDerivedFont0
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 510
+				"height": 19
+				"x": 0
+				"y": 240
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "delayLabel"
+				"text": "Delay between press and release:"
+				"font": #SwingDerivedFont0
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 510
+				"height": 19
+				"x": 0
+				"y": 315
+			} )
+			add( new FormComponent( "javax.swing.JSpinner" ) {
+				name: "delaySpinner"
+				"model": new javax.swing.SpinnerNumberModel( 100, 0, 5000, 50 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 0, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 205
+				"y": 340
+				"height": 30
+			} )
+			add( new FormComponent( "iamn5.edpn.screens.common.RoundJButton" ) {
+				name: "add"
+				"text": "Add key action"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "Eurostile-Roman", 0, 16, true )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 75
+				"y": 460
+				"width": 351
+				"height": 35
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 510, 560 )
+		} )
+	}
+}
