@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ import java.util.TimeZone;
 
 public class JFrameManager {
     private JFrame frame;
+    private JDialog modal;
+
     private final ListenableQueue<JSONObject> eventQueue;
     private final JournalMonitor journalMonitor;
     private final HotkeyMonitor hotkeyMonitor;
@@ -63,6 +66,30 @@ public class JFrameManager {
         Logger.info(pane.getClass().getSimpleName() + "screen loaded.");
     }
 
+    public void loadModal(Class<? extends JDialog> dialogClass, String title, boolean centerModal) {
+        if (modal != null) modal.dispose();
+
+        try {
+            modal = dialogClass.getDeclaredConstructor(Window.class).newInstance(frame);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            Logger.error("Error while loading modal " + dialogClass.getSimpleName());
+            e.printStackTrace();
+
+            return;
+        }
+
+        modal.setTitle(title);
+        modal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        modal.pack();
+        modal.setResizable(false);
+        modal.setIconImages(getIconList());
+        modal.setVisible(true);
+
+        if (centerModal) centerModal();
+
+        Logger.info("Loaded modal " + modal.getClass().getSimpleName());
+    }
+
     private ArrayList<Image> getIconList() {
         ArrayList<Image> imageList = new ArrayList<>();
 
@@ -99,6 +126,10 @@ public class JFrameManager {
 
     public void centerFrame() {
         center(frame);
+    }
+
+    public void centerModal() {
+        center(modal);
     }
 
     public JFrame getFrame() {
